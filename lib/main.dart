@@ -1,9 +1,18 @@
+import 'dart:io';
+
+void main(List<String> args) {
+  // printMessage();
+  // printOddOrEven();
+  // printElementsLessThanFive([1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]);
+  // printDivisors();
+  printCommon([1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]);
+}
+
 /* Exercise 1
   Create a program that asks the user to enter their name and their age.
   Print out a message that tells how many years they have to be 100 years old.
 */
-import 'dart:io';
-
 void printMessage() {
   stdout.writeln('What\'s your name?');
   String name = stdin.readLineSync()!;
@@ -75,4 +84,33 @@ void printDivisors() {
     for (int i = number; i > 0; i--)
       if (number % i == 0) i
   ]);
+}
+
+/* Exercise 5
+  Take two lists, for example:
+    a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+    b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+  and write a program that returns a list that contains only
+  the elements that are common between them (without duplicates).
+  Make sure your program works on two lists of different sizes.
+*/
+void printCommon(List<int> list1, List<int> list2) {
+  var newList1 = list1.toSet().toList();
+  var newList2 = list2.toSet().toList();
+  print([
+    for (var i in newList1)
+      for (var j in newList2)
+        if (i == j) i
+  ]);
+
+  // One Line
+  print(Set.from(list1).intersection(Set.from(list2)).toList());
+
+  // for (var i in newList1) {
+  //   for (var j in newList2) {
+  //     if (i == j) {
+  //       stdout.write("$i, ");
+  //     }
+  //   }
+  // }
 }

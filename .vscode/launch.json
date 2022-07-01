@@ -9,6 +9,7 @@
             "request": "launch",
             "type": "dart",
             "console": "terminal",
+            "program": "lib/main.dart"
         }
     ]
 }
