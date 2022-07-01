@@ -5,8 +5,17 @@ void main(List<String> args) {
   // printOddOrEven();
   // printElementsLessThanFive([1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]);
   // printDivisors();
-  printCommon([1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89],
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]);
+  // printCommon([1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]);
+  // stdout.writeln("Enter a palindrome sentence");
+  // String input = stdin.readLineSync()!;
+  // if (checkPalindrome(input)) {
+  //   print("your input is a palindrome.");
+  // } else {
+  //   print("your input is NOT a palindrome.");
+  // }
+  // checkPalindrome2();
+  // printEvenElements([1, 4, 9, 16, 25, 36, 49, 64, 81, 100]);
+  playRockPaperScissors();
 }
 
 /* Exercise 1
@@ -15,7 +24,7 @@ void main(List<String> args) {
 */
 void printMessage() {
   stdout.writeln('What\'s your name?');
-  String name = stdin.readLineSync()!;
+  String name = stdin.readLineSync()!;  
   stdout.writeln('Hello $name, How old are you?');
   try {
     int age = int.parse(stdin.readLineSync()!);
@@ -113,4 +122,86 @@ void printCommon(List<int> list1, List<int> list2) {
   //     }
   //   }
   // }
+}
+
+/* Exercise 6
+  Ask the user for a string and print out whether this string is a palindrome or not.
+*/
+bool checkPalindrome(String input) {
+  var newInput = input.toLowerCase();
+  List listOfCharacters = newInput.split('');
+  print(listOfCharacters);
+  for (int i = 0; i < listOfCharacters.length; i++) {
+    for (int j = listOfCharacters.length - 1; j >= 0; j++) {
+      if (listOfCharacters[i] == listOfCharacters[j]) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+  return false;
+}
+
+// Other solution
+void checkPalindrome2() {
+  stdout.writeln("Enter a word, phrase, or sentence.");
+  String input = stdin.readLineSync()!.toLowerCase();
+  String reversedInput = input.split('').reversed.join();
+
+  input == reversedInput
+      ? print("Your input is a palindrome")
+      : print("Your input is not a palindrome");
+}
+
+/* Exercise 7
+  Let’s say you are given a list saved in a variable:
+    a = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]. 
+  Write a Dart code that takes this list and makes a new list
+  that has only the even elements of this list in it.
+*/
+printEvenElements(List<int> list) {
+  List<int> newList = [];
+  for (var i in list) {
+    if (i % 2 == 0) {
+      newList.add(i);
+    }
+  }
+  print(newList);
+
+  // One Line
+  print([
+    for (var i in list)
+      if (i % 2 == 0) i
+  ]);
+}
+
+/* Exercise 8
+  Make a two-player Rock-Paper-Scissors game against computer.
+  `Ask for player’s input, compare them, print out a message to the winner.`
+*/
+void playRockPaperScissors() {
+  print("Rock Paper Scissors Game");
+  stdout.writeln("Player I\nWhat do you want to choose?");
+  String input1 = stdin.readLineSync()!.toLowerCase();
+  stdout.writeln("Player II\nWhat do you want to choose?");
+  String input2 = stdin.readLineSync()!.toLowerCase();
+
+  if (input1 == input2) {
+    print("Draw");
+  } else if (input1 == "rock" && input2 == "scissors") {
+    print("Player I win");
+  } else if (input1 == "scissors" && input2 == "rock") {
+    print("Player II win");
+  } else if (input1 == "paper" && input2 == "rock") {
+    print("Player I win");
+  } else if (input1 == "rock" && input2 == "paper") {
+    print("Player II win");
+  } else if (input1 == "scissors" && input2 == "paper") {
+    print("Player I win");
+  } else if (input1 == "paper" && input2 == "scissors") {
+    print("Player II win");
+  } else {
+    print("Please, enter a valid input");
+  }
 }
