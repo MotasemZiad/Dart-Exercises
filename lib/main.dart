@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 void main(List<String> args) {
   // printMessage();
@@ -15,7 +16,23 @@ void main(List<String> args) {
   // }
   // checkPalindrome2();
   // printEvenElements([1, 4, 9, 16, 25, 36, 49, 64, 81, 100]);
-  playRockPaperScissors();
+  // playRockPaperScissors();
+  // playRockPaperScissors2();
+  // guessNumber();
+  while (true) {
+    stdout.writeln("Enter a number");
+    int n = int.parse(stdin.readLineSync()!);
+
+    if (n == -1) {
+      print("End");
+      break;
+    }
+    if (isPrime(n)) {
+      print("$n is a prime number");
+    } else {
+      print("$n is NOT a prime number");
+    }
+  }
 }
 
 /* Exercise 1
@@ -24,7 +41,7 @@ void main(List<String> args) {
 */
 void printMessage() {
   stdout.writeln('What\'s your name?');
-  String name = stdin.readLineSync()!;  
+  String name = stdin.readLineSync()!;
   stdout.writeln('Hello $name, How old are you?');
   try {
     int age = int.parse(stdin.readLineSync()!);
@@ -203,5 +220,98 @@ void playRockPaperScissors() {
     print("Player II win");
   } else {
     print("Please, enter a valid input");
+  }
+}
+
+// Other solution
+void playRockPaperScissors2() {
+  print("Welcome to the Rock, Paper, Scissors\nType 'exit' to stop the game");
+  final random = Random();
+
+  Map<String, String> rules = {
+    "rock": "scissors",
+    "scissors": "paper",
+    "paper": "rock",
+  };
+
+  int userScore = 0;
+  int computerScore = 0;
+
+  List<String> options = ["rock", "paper", "scissors"];
+
+  while (true) {
+    String computerChoice = options[random.nextInt(options.length - 1)];
+    stdout.writeln("Please choose Rock, Paper, or Scissors:");
+    String userChoice = stdin.readLineSync()!.toLowerCase();
+
+    if (userChoice == "exit") {
+      print("You $userScore :: Computer $computerScore\nBye Bye!");
+      break;
+    }
+
+    if (!options.contains(userChoice)) {
+      print("Incorrect choice");
+      continue;
+    } else if (computerChoice == userChoice) {
+      print("Draw! We have a tie");
+    } else if (rules[computerChoice] == userChoice) {
+      print("Computer wins: $computerChoice VS. $userChoice");
+      computerScore++;
+    } else if (rules[userChoice] == computerChoice) {
+      print("You win: $userChoice VS. $computerChoice");
+      userScore++;
+    }
+  }
+}
+
+/* Exercise 9
+  Generate a random number between 1 and 100. Ask the user to guess the number,
+  then tell them whether they guessed too low, too high, or exactly right.
+  Keep track of how many guesses the user has taken, and when the game ends, print this out.
+*/
+void guessNumber() {
+  var randomNumber = Random().nextInt(101);
+  int attempt = 0;
+  print("Guessing Game!\nType '-1' to end the game.");
+  while (true) {
+    attempt += 1;
+    stdout.writeln("Guess a number from 1 to 100: ");
+    int number = int.parse(stdin.readLineSync()!);
+
+    if (number == -1) {
+      print("You tried $attempt times\nBye :)");
+      break;
+    }
+
+    if (number > 100 || number < 0) {
+      print("Please choose a number between 0 and 100");
+      continue;
+    } else if (number == randomNumber) {
+      print("Your guess is right! you tried $attempt times");
+      break;
+    } else if (number > randomNumber) {
+      print("You are higher");
+      continue;
+    } else if (number < randomNumber) {
+      print("You are lower");
+      continue;
+    }
+  }
+}
+
+/* Exercise 10
+  Ask the user for a number and determine whether the number is prime or not.
+  `Do it using a function`
+*/
+bool isPrime(int number) {
+  List<int> divisors = [
+    for (int i = 1; i <= number; i++)
+      if (number % i == 0) i
+  ];
+  print(divisors);
+  if (divisors.length == 2) {
+    return true;
+  } else {
+    return false;
   }
 }
