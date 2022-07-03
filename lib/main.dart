@@ -19,20 +19,25 @@ void main(List<String> args) {
   // playRockPaperScissors();
   // playRockPaperScissors2();
   // guessNumber();
-  while (true) {
-    stdout.writeln("Enter a number");
-    int n = int.parse(stdin.readLineSync()!);
+  // while (true) {
+  //   stdout.writeln("Enter a number");
+  //   int n = int.parse(stdin.readLineSync()!);
 
-    if (n == -1) {
-      print("End");
-      break;
-    }
-    if (isPrime(n)) {
-      print("$n is a prime number");
-    } else {
-      print("$n is NOT a prime number");
-    }
-  }
+  //   if (n == -1) {
+  //     print("End");
+  //     break;
+  //   }
+  //   if (isPrime(n)) {
+  //     print("$n is a prime number");
+  //   } else {
+  //     print("$n is NOT a prime number");
+  //   }
+  // }
+
+  // List<int> randomList = List.generate(10, (index) => Random().nextInt(100));
+  // print(randomList);
+  // print(newList(randomList));
+  // printFirstAndLast(randomList);
 }
 
 /* Exercise 1
@@ -315,3 +320,26 @@ bool isPrime(int number) {
     return false;
   }
 }
+
+/* Exercise 11
+  Write a program that takes a list of numbers for example
+    a = [5, 10, 15, 20, 25]
+  and makes a new list of only the first and last elements of the given list.
+  For practice, write this code inside a function.
+*/
+void printFirstAndLast(List<int> list) {
+  print("First Element: ${list[0]}\nLast Element: ${list[list.length - 1]}");
+
+  // Other method
+  print("First Element: ${list.first}\nLast Element: ${list.last}");
+}
+
+List<int> newList(List<int> initialList) {
+  return [initialList.first, initialList.last];
+}
+
+/* Exercise 12
+  Write a program that asks the user how many Fibonacci numbers to generate and then generates them.
+  Take this opportunity to think about how you can use functions.
+  `Make sure to ask the user to enter the number of numbers in the sequence to generate.`
+*/
