@@ -1,5 +1,5 @@
 # Dart Exercises
-A simple console dart application to practise *problem solving*.
+A simple console dart application to practise **problem solving**.
 
 ## Credits
 [Hackmd.io](https://hackmd.io/@kuzmapetrovich/S1x90jWGP)
