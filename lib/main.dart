@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
@@ -38,6 +39,60 @@ void main(List<String> args) {
   // print(randomList);
   // print(newList(randomList));
   // printFirstAndLast(randomList);
+  // while (true) {
+  //   stdout.writeln("How many fibonacci numbers do you want to generate?");
+  //   int input = int.parse(stdin.readLineSync()!);
+  //   if (input == -1) {
+  //     break;
+  //   }
+  //   print(generateFibonacciNumbers(input));
+  // }
+  // while (true) {
+  //   stdout.writeln("Enter the length of the list");
+  //   int listLength = int.parse(stdin.readLineSync()!);
+  //   if (listLength == -1) {
+  //     break;
+  //   }
+  //   List<int> listOfNumbers = List.generate(
+  //     listLength,
+  //     (_) => Random().nextInt(listLength),
+  //   );
+  //   print("Before:");
+  //   print(listOfNumbers);
+
+  //   var result = removeDuplicates(
+  //     list: listOfNumbers,
+  //   );
+  //   print("After:");
+  //   print(result);
+
+  //   result.sort();
+  //   print("After Sort:");
+  //   print(result);
+  // }
+
+  // while (true) {
+  //   stdout.writeln("Enter a sentence:");
+  //   String input = stdin.readLineSync()!;
+
+  //   if (input == 'exit') {
+  //     break;
+  //   }
+
+  //   print(reverseString(input));
+  // }
+
+  // while (true) {
+  //   stdout.writeln(
+  //       "*Password Generator*\nHow strong a password do you want? Weak, Medium, or Strong:");
+  //   String strength = stdin.readLineSync()!.toLowerCase();
+
+  //   if (strength == 'exit') {
+  //     break;
+  //   }
+
+  //   print(passwordGenerator(strength));
+  // }
 }
 
 /* Exercise 1
@@ -343,3 +398,71 @@ List<int> newList(List<int> initialList) {
   Take this opportunity to think about how you can use functions.
   `Make sure to ask the user to enter the number of numbers in the sequence to generate.`
 */
+List<int> generateFibonacciNumbers(int input) {
+  List<int> fibonacciNumbers = [1, 1];
+
+  for (int i = 0; i <= input; i++) {
+    fibonacciNumbers.add(fibonacciNumbers[i] + fibonacciNumbers[i + 1]);
+  }
+
+  return fibonacciNumbers;
+}
+
+/* Exercise 13
+  Write a program (function) that takes a list and returns a new list
+  that contains all the elements of the first list minus all the duplicates.
+*/
+List<int> removeDuplicates({required List<int> list}) => list.toSet().toList();
+
+/* Exercise 14
+  Write a program (using functions!) that asks the user for a long string containing multiple words.
+  Print back to the user the same string, except with the words in backwards order.
+  For example, say I type the string:
+    `My name is Michele`
+  Then I would see the string:
+    `Michele is name My`
+*/
+String reverseString(String input) {
+  // final listOfReversedWords = input.split(' ').reversed;
+  // return listOfReversedWords.join(' ');
+
+  // One line
+  return input.split(' ').reversed.join(' ');
+}
+
+/* Exercise 15
+  Write a password generator in Dart.
+  Be creative with how you generate passwords - strong passwords have a mix of lowercase letters, uppercase letters, numbers, and symbols.
+  The passwords should be random, generating a new password every time the user asks for a new password.
+  Include your run-time code in a main method.
+  
+  `Ask the user how strong they want their password to be.
+  For weak passwords, pick a word or two from a list.`
+
+  :exclamation: Do not use the generated password in your real accounts. Use 1password.
+*/
+String passwordGenerator(String strength) {
+  switch (strength) {
+    case "weak":
+      return shuffleGenerator(6);
+    case "medium":
+      return shuffleGenerator(12);
+    case "strong":
+      return shuffleGenerator(18);
+    default:
+      return "Incorrect word is given";
+  }
+}
+
+String shuffleGenerator(int length) {
+  final random = Random.secure();
+  List<int> listOfAsciiCode = List.generate(
+    length,
+    (index) => random.nextInt(255),
+  );
+  List<String> listOfCharacters =
+      base64UrlEncode(listOfAsciiCode).split('').toList();
+
+  listOfCharacters.shuffle();
+  return listOfCharacters.join('');
+}
