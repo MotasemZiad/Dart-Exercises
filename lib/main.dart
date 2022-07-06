@@ -466,3 +466,7 @@ String shuffleGenerator(int length) {
   listOfCharacters.shuffle();
   return listOfCharacters.join('');
 }
+
+/* Exercise 16
+  
+*/ 
